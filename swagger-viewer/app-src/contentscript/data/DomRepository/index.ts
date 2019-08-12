@@ -1,64 +1,65 @@
 import { APP_RENDER_ID } from "../../../shared/constants/App"
 import { querySelector, querySelectorAll } from "../QuerySelector"
+import axios from 'axios';
 
-/**
- * DOMアクセス全般を実装する
- */
-const RX_SWAGGER_PAGE = /^https:\/\/github\.com\/.*\.(ya?ml|json)($|#L\d+$|#L\d+-L\d+$)/
 
-export const isAcceptableLocation = (documentInstance: Document): boolean => {
-  return RX_SWAGGER_PAGE.test(documentInstance.location.href)
-}
 
 export const isConverted = (): boolean => {
   return querySelector(`#${APP_RENDER_ID}`) != null
 }
 
-export const getElmOfSrcCode = (): HTMLElement => {
-  const selector = "div.repository-content > div.Box > div.Box-body > table"
-  const element = querySelector(selector)
+export async function asyncGetElmOfSrcCode()  {
+  let response = await getElmOfSrcCode().catch((err) => {
+          console.log(err);
+        }
+    );
+console.log(response);
+  return response;
 
-  if (
-    element == null ||
-    element.textContent == null ||
-    element.textContent.length === 0
-  ) {
-    throw new Error(`Unexpected DOM. selector: "${selector}"`)
-  }
-
-  return element as HTMLElement
 }
 
-export const extractSrc = (): string => {
-  const elm = getElmOfSrcCode()
+export const getElmOfSrcCode = () => {
+  //const selector = "div.repository-content > div.Box > div.Box-body > table";
+  const selector = "a.raw-link";
+  const element =  querySelector(selector);
 
-  if (!elm.textContent) {
+  return axios.get(''+element).then(response =>response.data);
+
+};
+
+
+export async function extractSrc() {
+
+  const elm = await asyncGetElmOfSrcCode();
+
+  if (!elm) {
     throw new Error("Unexpected null")
   }
 
-  return (
-    elm.textContent
-      .trim()
-      .split("\n")
-      // 半角スペースだけの空行が取得できてしまうため
-      .filter((line) => line.trim().length !== 0)
-      // 余分なインデントの削除
-      .map((line) => line.replace(/^ {8}/, ""))
-      .join("\n")
-  )
+  return elm;
 }
 
-export const removeSrcCodeDom = (): void => {
-  const elm = getElmOfSrcCode()
+export const resizeHomePageUpTo50 = (): void => {
+  const selector = "#content";
+  let element =  querySelector(selector);
+  if(element){
+    element.style.width='50%';
+  }else {
+    throw new Error("Cannot resize home page ! ")
+  }
+};
 
-  // 今は必ず1要素。自身ごと削除すると、後でDOM injectするのが大変なためchildをremove
-  elm.children[0].remove()
-}
+export const resizeHomePageUpTo100 = (): void => {
+  const selector = "#content";
+  let element =  querySelector(selector);
+  if(element){
+    element.style.width='100%';
+  }else {
+    throw new Error("Cannot resize back home page ! ")
+  }
+};
 
-/**
- * Swaggerの各エンドポイント定義のヘッダー部分を取得して返す
- * @param {boolean} isOpened true: 開いてる状態のヘッダーのみ取得 | false: 閉じている状態のヘッダーのみ取得
- */
+
 export const getElmOfSwaggerEndPointDefHeaders = (
   isOpened: boolean,
 ): readonly HTMLDivElement[] => {

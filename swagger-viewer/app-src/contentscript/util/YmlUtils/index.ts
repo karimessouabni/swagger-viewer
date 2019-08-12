@@ -6,11 +6,13 @@ import { MaybeSwaggerJson } from "../../../shared/types/Swagger"
  */
 export const convertToObject = (str: string): MaybeSwaggerJson | null => {
   if (str == null) {
-    // type check しているが、元ネタが信用できないケースがあるため
     return null
   }
 
-  const maybe = jsYaml.load(str)
+  console.log("calling an external library");
+
+  const maybe = jsYaml.load(str);  // calling an external library
+  console.log(maybe);
   if (maybe == null) {
     return null
   }

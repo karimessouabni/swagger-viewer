@@ -25,7 +25,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/*"
+        "https://github.com/*",
+        "https://bitbucket.org/*"
       ],
       "js": [
         "scripts/contentscript.js"

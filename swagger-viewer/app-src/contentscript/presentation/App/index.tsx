@@ -38,12 +38,10 @@ export const App: React.FC<Props> = ({ swaggerJson }) => {
 }
 
 const onClickExpandAll = async () => {
-  const isOpend = false
+  const isOpend = false;
   getElmOfSwaggerEndPointDefHeaders(isOpend).forEach((e) => e.click())
 
-  // ネストしたModelを全て展開する
-  // 無限ループにさせないため、ある程度の数で打ち切る
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   for (const _ of range(0, 10)) {
     const targets = getElmOfSwaggerSchemasModelHeaders(isOpend)
     if (targets.length === 0) {
@@ -51,17 +49,16 @@ const onClickExpandAll = async () => {
     }
     targets.forEach((e) => e.click())
 
-    // 空振り防止のための描画待ち
     await sleep(300)
   }
 }
 
 const onClickCollapseAll = () => {
-  const isOpend = true
-  // 全ての Open 状態に対して「閉じる」ため、再帰処理は不要
+  const isOpend = true;
+
   getElmOfSwaggerEndPointDefHeaders(isOpend).forEach((e) => e.click())
   getElmOfSwaggerSchemasModelHeaders(isOpend).forEach((e) => e.click())
-}
+};
 
 const Header = styled.div`
   display: flex;
