@@ -43,7 +43,9 @@ export const resizeHomePageUpTo50 = (): void => {
   const selector = "#content";
   let element =  querySelector(selector);
   if(element){
-    element.style.width='50%';
+
+    element.style.gridColumn="1";
+
   }else {
     throw new Error("Cannot resize home page ! ")
   }

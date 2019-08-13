@@ -5,7 +5,7 @@ import {
   extractSrc,
   isConverted,
   resizeHomePageUpTo50,
-  resizeHomePageUpTo100
+  resizeHomePageUpTo100, getElmOfSrcCode
 } from "../../app-src/contentscript/data/DomRepository"
 import { getDocument } from "../../app-src/contentscript/data/QuerySelector/Document"
 import { render } from "../../app-src/contentscript/presentation"
@@ -52,31 +52,38 @@ Could not convert.
   }
 
   removeAndInject();
-  render(swaggerJson || "")
+  render(swaggerJson || "");
 
   console.log("Convert completed")
 }
 
 
-export async function removeAndInject() {
-
+const removeAndInject = (): void => {
+  // 元srcを削除
   resizeHomePageUpTo50();
-  const selector = "#content";
-  let element =  querySelector(selector);
-if(element) {
-  const injWrapper = element.innerHTML = element.innerHTML + `
-    <script>
-      var global = global || window;
-    </script>
-    <div id="${APP_RENDER_ID}"><div>
-    `;
-
-  const elm = await asyncGetElmOfSrcCode();
 
 
-  console.log("injected" + elm);
+  // 元srcのところにrenderする
+  const injWrapper = getDocument().createElement("div")
+  injWrapper.innerHTML = `
+<script>
+  var global = global || window;
+</script>
+<div id="${APP_RENDER_ID}"><div>
+`
+  injWrapper.style.gridColumn="2";
 
+  const selector = "#wrapper";
+  const elm = querySelector(selector);
+  if (elm) {
+    elm.appendChild(injWrapper);
+    elm.style.display="grid";
+    elm.style.width = "-webkit-fill-available";
 
-  global.Buffer = global.Buffer || require("buffer").Buffer
+    console.log("injected");
+
+    // swagger-ui-reactの依存ライブラリのため追加
+    // eslint-disable-next-line global-require
+    global.Buffer = global.Buffer || require("buffer").Buffer
   }
 }
