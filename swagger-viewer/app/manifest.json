@@ -2,7 +2,7 @@
   "name": "__MSG_appName__",
   "short_name": "__MSG_appShortName__",
   "description": "__MSG_appDescription__",
-  "version": "1.1.0",
+  "version": "1.0",
   "manifest_version": 2,
   "default_locale": "en",
   "icons": {
@@ -15,8 +15,19 @@
       "scripts/background.js"
     ]
   },
+
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "MacCtrl+Shift+C"
+      },
+      "description": "Converting Swagger"
+    }
+  },
+
   "browser_action": {
-    "default_title": "Convert!"
+    "default_title": "Converting !"
   },
   "options_ui": {
     "page": "pages/options.html",
@@ -36,6 +47,8 @@
     }
   ],
   "permissions": [
+    "activeTab",
+    "contextMenus",
     "tabs"
   ]
 }

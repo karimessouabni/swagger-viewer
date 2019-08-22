@@ -1,1 +1,1 @@
-export const APP_RENDER_ID = "swagger-viewer-render-root"
+export const SWAG_ID = "swag-converter"

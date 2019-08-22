@@ -1,30 +1,31 @@
-import { APP_RENDER_ID } from "../../../shared/constants/App"
+import { SWAG_ID } from "../../../shared/constants/App"
 import { querySelector, querySelectorAll } from "../QuerySelector"
 import axios from 'axios';
 
 
+const GITHUB = /^.*github.*/;
+const BITBUCKET = /^.*bitbucket.*/;
+
+export const isAcceptableLocation = (documentInstance: Document): boolean => {
+  console.log(BITBUCKET.test(documentInstance.location.href));
+  return BITBUCKET.test(documentInstance.location.href);
+};
 
 export const isConverted = (): boolean => {
-  return querySelector(`#${APP_RENDER_ID}`) != null
-}
+  return querySelector(`#${SWAG_ID}`) != null
+};
 
 export async function asyncGetElmOfSrcCode()  {
-  let response = await getElmOfSrcCode().catch((err) => {
-          console.log(err);
-        }
-    );
-console.log(response);
-  return response;
 
+  return  await getElmOfSrcCode().catch((err) => console.log(err));
 }
 
 export const getElmOfSrcCode = () => {
-  //const selector = "div.repository-content > div.Box > div.Box-body > table";
-  const selector = "a.raw-link";
-  const element =  querySelector(selector);
-
+  const selector = "div#root > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(1) > div > div> div > div> div:nth-of-type(1) > div > div:nth-of-type(4) > a";
+  let element =  querySelector(selector);
+  if(element)
+  element = element.href.replace("full-commit", "raw");
   return axios.get(''+element).then(response =>response.data);
-
 };
 
 
@@ -40,22 +41,24 @@ export async function extractSrc() {
 }
 
 export const resizeHomePageUpTo50 = (): void => {
-  const selector = "#content";
+  const selector = "div#root > div > div > div:nth-of-type(2) > div > div";
   let element =  querySelector(selector);
   if(element){
 
-    element.style.gridColumn="1";
+    element.style.cssFloat="left";
+    element.style.width="50%";
 
   }else {
-    throw new Error("Cannot resize home page ! ")
+    throw new Error("Cannot resize home page !")
   }
 };
 
 export const resizeHomePageUpTo100 = (): void => {
-  const selector = "#content";
+  const selector = "div#root > div > div > div:nth-of-type(2) > div > div";
   let element =  querySelector(selector);
   if(element){
     element.style.width='100%';
+    // TODO : remove the swagger div
   }else {
     throw new Error("Cannot resize back home page ! ")
   }
@@ -71,10 +74,7 @@ export const getElmOfSwaggerEndPointDefHeaders = (
   return querySelectorAll("div.opblock:not(.is-open) > .opblock-summary") as any
 }
 
-/**
- * Swaggerの各Model定義の開閉アイコン部分を取得して返す
- * @param {boolean} isOpened true: 開いてる状態のヘッダーのみ取得 | false: 閉じている状態のヘッダーのみ取得
- */
+
 export const getElmOfSwaggerSchemasModelHeaders = (
   isOpened: boolean,
 ): readonly HTMLDivElement[] => {
