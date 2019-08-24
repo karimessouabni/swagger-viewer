@@ -1,1 +1,1 @@
-export const SWAG_ID = "swag-converter"
+export const SWAG_ID = "swag-converter";

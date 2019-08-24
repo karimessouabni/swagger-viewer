@@ -1,7 +1,3 @@
-/**
- * lodashは重いため、機能を削った代替実装
- */
-
 export const range = (from: number, to: number): readonly number[] => {
   if (to < from) {
     throw new Error("Universal error: Illegal arg")

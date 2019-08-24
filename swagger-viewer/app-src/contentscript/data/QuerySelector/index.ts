@@ -1,17 +1,11 @@
 import { getDocument } from "./Document";
-//import {get} from "http";
-/**
- * document.querySelectorAll() をモック可能にするためのラッパー
- */
+
 export const querySelectorAll = (
   selector: string,
 ): ReadonlyArray<HTMLElement> => {
   return Array.prototype.slice.call(getDocument().querySelectorAll(selector))
 };
 /**
- * 1要素をgetする
- *
- * @throws 2要素以上見つかった
  */
 export const querySelector = (selector: string): HTMLElement | null => {
   const founds = querySelectorAll(selector);
@@ -46,4 +40,4 @@ export const exQuerySelectorStrict = <T extends HTMLElement>(
     return founds[0] as any
   }
   throw new Error(`Logic Failure: "${selector}" is always 1 element exists`)
-}
+};

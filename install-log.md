@@ -5,7 +5,7 @@ npm init
 
 # install
 npm install yo generator-web-extension
-mkdir swagger-viewer && cd $_
+mkdir swaggerConverter && cd $_
 npx yo web-extension
 
 # TypeScript

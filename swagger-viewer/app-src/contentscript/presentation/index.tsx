@@ -11,4 +11,4 @@ export const render = (swaggerJson: MaybeSwaggerJson | string) => {
     <App swaggerJson={swaggerJson} />,
     getDocument().getElementById(SWAG_ID),
   )
-}
+};

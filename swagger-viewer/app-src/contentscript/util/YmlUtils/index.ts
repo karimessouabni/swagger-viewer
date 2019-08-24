@@ -1,9 +1,6 @@
 import jsYaml from "js-yaml"
 import { MaybeSwaggerJson } from "../../../shared/types/Swagger"
 
-/**
- * @param str yml string | json string
- */
 export const convertToObject = (str: string): MaybeSwaggerJson | null => {
   if (str == null) {
     return null
@@ -20,4 +17,4 @@ export const convertToObject = (str: string): MaybeSwaggerJson | null => {
     return null
   }
   return maybe
-}
+};

@@ -1,14 +1,14 @@
 {
   "appName": {
-    "message": "swagger-viewer",
-    "description": "The name of the application"
+    "message": "swaggerConverter",
+    "description": "application name "
   },
   "appShortName": {
-    "message": "sw-viewer",
-    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+    "message": "swagConvert",
+    "description": "short-name"
   },
   "appDescription": {
-    "message": "Shows swagger yaml/json rendered by Swagger-UI.\nThis extension replace swagger code into preview html in GitHub.",
-    "description": "The description of the application"
+    "message": "Swagger conversion from Json/Yaml to UI",
+    "description": "description "
   }
 }

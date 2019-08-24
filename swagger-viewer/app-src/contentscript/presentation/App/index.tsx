@@ -12,10 +12,6 @@ import {
 import { Button } from "../Button"
 
 type Props = {
-  /**
-   * Swaggerではないjsonを読み込んだ場合、エラーメッセージを表示可能で有用。
-   * そのため、無効なjsonでも読み込ませる
-   */
   swaggerJson: MaybeSwaggerJson | string
 }
 
@@ -24,7 +20,7 @@ export const App: React.FC<Props> = ({ swaggerJson }) => {
     <>
       <Header>
         <Button onClick={onClickExpandAll}>Expand All</Button>
-        <Button onClick={onClickCollapseAll}>Collapse All</Button>
+        <Button onClick={onClickCollapseAll}>Close All</Button>
       </Header>
       <SwaggerUIWrapper>
         <SwaggerUI spec={swaggerJson} />
@@ -67,8 +63,16 @@ const Header = styled.div`
 
   & > button {
     margin-left: 3px;
+    line-height: 1;
+    display: inline;
+    color: #49cc90;
+    border-color: #49cc90;
+    background-color: transparent;
+        padding-right: 20px;
+    margin-right: 10px;
+transition: all .3s; border: 2px solid gray; border-radius: 4px; background: transparent;font-size: 14px; font-weight: 700; padding: 5px 23px;box-shadow: 0 1px 2px rgba(0,0,0,.1); font-family: sans-serif;
   }
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -77,12 +81,20 @@ const Footer = styled.div`
 
   & > button {
     margin-left: 3px;
+    line-height: 1;
+    display: inline;
+    color: #49cc90;
+    border-color: #49cc90;
+    background-color: transparent;
+        padding-right: 20px;
+    margin-right: 10px;
+transition: all .3s; border: 2px solid gray; border-radius: 4px; background: transparent;font-size: 14px; font-weight: 700; padding: 5px 23px;box-shadow: 0 1px 2px rgba(0,0,0,.1); font-family: sans-serif;
   }
-`
+`;
+
 
 const SwaggerUIWrapper = styled.div`
   & > .swagger-ui .information-container.wrapper .info {
-    /* トップに無駄な余白を取っているため */
     margin: 0 !important;
   }
-`
+`;

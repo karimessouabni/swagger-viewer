@@ -16,16 +16,28 @@ export const isConverted = (): boolean => {
 };
 
 export async function asyncGetElmOfSrcCode()  {
-
   return  await getElmOfSrcCode().catch((err) => console.log(err));
 }
 
 export const getElmOfSrcCode = () => {
+  let url;
   const selector = "div#root > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(1) > div > div> div > div> div:nth-of-type(1) > div > div:nth-of-type(4) > a";
+  const selector2 = " a>time";
+  let element2;
+  if(selector2) {
+    element2 =  querySelector(selector2) ? querySelector(selector2).parentElement : null;
+  }
   let element =  querySelector(selector);
-  if(element)
-  element = element.href.replace("full-commit", "raw");
-  return axios.get(''+element).then(response =>response.data);
+  if(element){
+    url = element.href.replace("full-commit", "raw");
+  }
+  else if(element2) {
+    let fileName = element2.parentElement.previousElementSibling.previousElementSibling.innerText;
+   if (fileName) url = element2.href.replace("commits", "raw")+'/'+fileName;
+
+  }
+
+  return axios.get(''+url).then(response =>response.data);
 };
 
 
@@ -50,17 +62,6 @@ export const resizeHomePageUpTo50 = (): void => {
 
   }else {
     throw new Error("Cannot resize home page !")
-  }
-};
-
-export const resizeHomePageUpTo100 = (): void => {
-  const selector = "div#root > div > div > div:nth-of-type(2) > div > div";
-  let element =  querySelector(selector);
-  if(element){
-    element.style.width='100%';
-    // TODO : remove the swagger div
-  }else {
-    throw new Error("Cannot resize back home page ! ")
   }
 };
 

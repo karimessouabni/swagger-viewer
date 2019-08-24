@@ -1,10 +1,9 @@
-// regenerator-runtime/runtime for async/await
 import "regenerator-runtime/runtime"
 import {
   isAcceptableLocation,
   extractSrc,
   isConverted,
-  resizeHomePageUpTo50, resizeHomePageUpTo100
+  resizeHomePageUpTo50
 } from "../../app-src/contentscript/data/DomRepository"
 import { getDocument } from "../../app-src/contentscript/data/QuerySelector/Document"
 import { render } from "../../app-src/contentscript/presentation"
