@@ -70,7 +70,8 @@ const Header = styled.div`
     background-color: transparent;
         padding-right: 20px;
     margin-right: 10px;
-transition: all .3s; border: 2px solid gray; border-radius: 4px; background: transparent;font-size: 14px; font-weight: 700; padding: 5px 23px;box-shadow: 0 1px 2px rgba(0,0,0,.1); font-family: sans-serif;
+    border: 2px solid #28a745;
+transition: all .3s; border: 2px solid #28a745; border-radius: 4px; background: transparent;font-size: 14px; font-weight: 700; padding: 5px 23px;box-shadow: 0 1px 2px rgba(0,0,0,.1); font-family: sans-serif;
   }
 `;
 
@@ -84,11 +85,12 @@ const Footer = styled.div`
     line-height: 1;
     display: inline;
     color: #49cc90;
+    border: 2px solid #28a745;
     border-color: #49cc90;
     background-color: transparent;
         padding-right: 20px;
     margin-right: 10px;
-transition: all .3s; border: 2px solid gray; border-radius: 4px; background: transparent;font-size: 14px; font-weight: 700; padding: 5px 23px;box-shadow: 0 1px 2px rgba(0,0,0,.1); font-family: sans-serif;
+transition: all .3s; border: 2px solid #28a745; border-radius: 4px; background: transparent;font-size: 14px; font-weight: 700; padding: 5px 23px;box-shadow: 0 1px 2px rgba(0,0,0,.1); font-family: sans-serif;
   }
 `;
 

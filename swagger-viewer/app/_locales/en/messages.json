@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "swaggerConverter",
+    "message": "Swagger UI Converter",
     "description": "application name "
   },
   "appShortName": {
@@ -8,7 +8,7 @@
     "description": "short-name"
   },
   "appDescription": {
-    "message": "Swagger conversion from Json/Yaml to UI",
+    "message": "Displaying a conversion from Json/Yaml swagger file to swagger UI.\n Working on Github and Bitbucket v6.5",
     "description": "description "
   }
 }
